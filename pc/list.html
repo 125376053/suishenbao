@@ -10,73 +10,78 @@
 </head>
 <body>
 
-<header>
-    <div class="center">
-        <div class="logo">
-            <img src="./images/logo.png" alt="">
-        </div>
-        <div class="nav">
-            <a href="index.html">首页</a>
-            <a class="navCur" href="list.html">资讯</a>
-            <a href="hezuo.html">商务合作</a>
-            <a href="about.html">关于我们</a>
-        </div>
-        <div class="search">
-            <input type="text" placeholder="搜索资讯">
-            <span></span>
-        </div>
-    </div>
-</header>
-
-<content class="vue">
-    <div class="list">
-        <div class="swiper-container">
-            <div class="swiper-wrapper">
-
-                <div class="swiper-slide" v-for="(item,index) in bannerList">
-                    <img :src="item.picUrl" alt="">
-                    <div class="info">
-                        <p class="title">{{item.title}}</p>
-                        <p class="neirong" style="overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient: vertical;">
-                            {{item.name}}
-                        </p>
-                        <a :href="'detail.html?id='+item.articleId">立即查看</a>
-                    </div>
-                </div>
-
+<div class="vue">
+    <header>
+        <div class="center">
+            <div class="logo">
+                <img src="./images/logo.png" alt="">
             </div>
-            <!-- 如果需要分页器 -->
-            <!--<div class="swiper-pagination"></div>-->
-            <!-- 如果需要导航按钮 -->
-            <div class="swiper-button-prev"></div>
-            <div class="swiper-button-next"></div>
+            <div class="nav">
+                <a href="index.html">首页</a>
+                <a class="navCur" href="list.html">资讯</a>
+                <a href="hezuo.html">商务合作</a>
+                <a href="about.html">关于我们</a>
+            </div>
+            <div class="search">
+                <input v-model="search" type="text" placeholder="搜索资讯">
+                <span style="cursor: pointer;" @click="searchFn"></span>
+            </div>
         </div>
-        <div class="list_list">
-            <ul>
-                <li v-for="(item,index) in articleList">
-                    <a :href="'detail.html?id='+item.id">
-                        <div class="img">
-                            <img :src="item.articleImg" alt="">
-                        </div>
-                        <div class="right">
+    </header>
+
+    <content>
+        <div class="list">
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+
+                    <div class="swiper-slide" v-for="(item,index) in bannerList">
+                        <img :src="item.picUrl" alt="">
+                        <div class="info">
                             <p class="title">{{item.title}}</p>
-                            <p class="jianjie">
-                                {{item.shortDesc}}
+                            <p class="neirong" style="overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient: vertical;">
+                                {{item.name}}
                             </p>
-                            <div class="foo">
-                                <span>{{item.createTime}}</span>
-                                <span>阅读量:{{item.readNum}}</span>
-                            </div>
+                            <a :href="'detail.html?id='+item.articleId">立即查看</a>
                         </div>
-                    </a>
-                </li>
-            </ul>
+                    </div>
+
+                </div>
+                <!-- 如果需要分页器 -->
+                <!--<div class="swiper-pagination"></div>-->
+                <!-- 如果需要导航按钮 -->
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
+            </div>
+            <div class="list_list">
+                <ul>
+                    <li v-for="(item,index) in articleList">
+                        <a :href="'detail.html?id='+item.id">
+                            <div class="img">
+                                <img :src="item.articleImg" alt="">
+                            </div>
+                            <div class="right">
+                                <p class="title">{{item.title}}</p>
+                                <p class="jianjie">
+                                    {{item.shortDesc}}
+                                </p>
+                                <div class="foo">
+                                    <span>{{item.createTime}}</span>
+                                    <span>阅读量:{{item.readNum}}</span>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="fenyeWrap">
+                <div id="myPage" class="fenye"></div>
+            </div>
         </div>
-        <div class="fenyeWrap">
-            <div id="myPage" class="fenye"></div>
-        </div>
-    </div>
-</content>
+    </content>
+</div>
+
+
+
 
 <footer>
     <div class="center">
@@ -204,6 +209,9 @@
                         }
                     }
                 });
+            },
+            searchFn(){
+                this.getArticleList()
             }
         }
     })
