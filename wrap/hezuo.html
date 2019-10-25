@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <title>商务合作</title>
+    <script>
+        (function(win,doc){
+            function change(){
+                doc.documentElement.style.fontSize=doc.documentElement.clientWidth/375*100+'px';
+            }
+            change();
+            win.addEventListener('resize',change,false);
+        })(window,document);
+    </script>
+    <link rel="stylesheet" href="css/all.css">
+</head>
+<body>
+<header>
+    <img class="logo" src="./images/logo@2x.png" alt="">
+    <img class="navBtn" src="./images/icon_home_menu@2x.png" alt="">
+    <ul class="nav">
+        <img class="close" src="./images/icon_menu_close@2x.png" alt="">
+        <li>
+            <a href="index.html">
+                <span class="line"></span>
+                <p>首页</p>
+                <p>HOME</p>
+            </a>
+        </li>
+        <li>
+            <a href="list.html">
+                <span class="line"></span>
+                <p>资讯</p>
+                <p>INFORMATION</p>
+            </a>
+        </li>
+        <li class="curNav">
+            <a href="hezuo.html">
+                <span class="line"></span>
+                <p>商务合作</p>
+                <p>COOPERATION</p>
+            </a>
+        </li>
+        <li>
+            <a href="about.html">
+                <span class="line"></span>
+                <p>关于我们</p>
+                <p>ABOUT US</p>
+            </a>
+        </li>
+    </ul>
+</header>
+
+<content>
+    <div class="hezuo">
+        <div class="baner">
+            <img src="./images/banner_cooperation@2x.png" alt="">
+        </div>
+        <ul>
+            <li>
+                <div class="right">
+                    <h2>商务合作</h2>
+                    <p>联系电话:13581680604<span>(同微信)</span></p>
+                    <p>工作邮箱:jingwangpmc@163.com</p>
+                    <h4>工作支持</h4>
+                    <p>平台对接合作、保险咨询服务运营等</p>
+                </div>
+            </li>
+            <li>
+                <div class="right">
+                    <h2>客服支持</h2>
+                    <p>客服邮箱:suishenbao@126.com</p>
+                    <h4>工作支持</h4>
+                    <p>客户咨询服务、投诉建议等</p>
+                </div>
+            </li>
+        </ul>
+    </div>
+</content>
+
+<footer>
+    <div class="footer1">
+        <div>
+            <img src="./images/Qrcode_gongzhonghao@2x.png" alt="">
+            <p>随身保公众号</p>
+        </div>
+        <div>
+            <img src="./images/Qrcode_xiaochengxu@2x.png" alt="">
+            <p>随身保小程序</p>
+        </div>
+    </div>
+    <div class="footer2">
+        <p>©2019 随身宝典 版权所有 京ICP备17010031号-1</p>
+        <p>北京随身宝典信息科技有限公司</p>
+    </div>
+</footer>
+
+</body>
+</html>
+<script src="js/vue.js"></script>
+<script src="js/jquery-1.10.1.min.js"></script>
+<script>
+    $(".navBtn").click(function(){
+        $('.nav').stop().slideDown('slow')
+    })
+    $(".close").click(function(){
+        $('.nav').stop().slideUp('fast')
+    })
+</script>

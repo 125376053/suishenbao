@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <title>资讯</title>
+    <script>
+        (function(win,doc){
+            function change(){
+                doc.documentElement.style.fontSize=doc.documentElement.clientWidth/375*100+'px';
+            }
+            change();
+            win.addEventListener('resize',change,false);
+        })(window,document);
+    </script>
+    <link rel="stylesheet" href="css/jquery.sPage.css">
+    <link rel="stylesheet" href="css/swiper.min.css">
+    <link rel="stylesheet" href="css/all.css">
+</head>
+<body>
+<header>
+    <img class="logo" src="./images/logo@2x.png" alt="">
+    <img class="navBtn" src="./images/icon_home_menu@2x.png" alt="">
+    <ul class="nav">
+        <img class="close" src="./images/icon_menu_close@2x.png" alt="">
+        <li>
+            <a href="index.html">
+                <span class="line"></span>
+                <p>首页</p>
+                <p>HOME</p>
+            </a>
+        </li>
+        <li class="curNav">
+            <a href="list.html">
+                <span class="line"></span>
+                <p>资讯</p>
+                <p>INFORMATION</p>
+            </a>
+        </li>
+        <li>
+            <a href="hezuo.html">
+                <span class="line"></span>
+                <p>商务合作</p>
+                <p>COOPERATION</p>
+            </a>
+        </li>
+        <li>
+            <a href="about.html">
+                <span class="line"></span>
+                <p>关于我们</p>
+                <p>ABOUT US</p>
+            </a>
+        </li>
+    </ul>
+</header>
+
+<content class="vue">
+    <div class="list">
+
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide" v-for="(item,index) in bannerList">
+                    <img :src="item.picUrl" alt="">
+                    <div class="info">
+                        <p class="title">{{item.title}}</p>
+                        <p class="neirong" style="overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient: vertical;">
+                            {{item.name}}
+                        </p>
+                        <a :href="'detail.html?id='+item.articleId">立即查看</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="list_list">
+            <ul>
+                <li v-for="(item,index) in articleList">
+                    <a :href="'detail.html?id='+item.id">
+                        <div class="img">
+                            <img :src="item.articleImg" alt="">
+                        </div>
+                        <div class="right">
+                            <p class="title">{{item.title}}</p>
+                            <p class="jianjie">
+                                {{item.shortDesc}}
+                            </p>
+                            <div class="foo">
+                                <span>{{item.createTime}}</span>
+                                <span>阅读量:{{item.readNum}}</span>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="fenyeWrap">
+            <div id="myPage" class="fenye"></div>
+        </div>
+
+    </div>
+</content>
+
+<footer>
+    <div class="footer1">
+        <div>
+            <img src="./images/Qrcode_gongzhonghao@2x.png" alt="">
+            <p>随身保公众号</p>
+        </div>
+        <div>
+            <img src="./images/Qrcode_xiaochengxu@2x.png" alt="">
+            <p>随身保小程序</p>
+        </div>
+    </div>
+    <div class="footer2">
+        <p>©2019 随身宝典 版权所有 京ICP备17010031号-1</p>
+        <p>北京随身宝典信息科技有限公司</p>
+    </div>
+</footer>
+
+</body>
+</html>
+<script src="js/vue.js"></script>
+<script src="js/jquery-1.10.1.min.js"></script>
+<script src="js/jquery.sPage.js"></script>
+<script src="js/swiper.min.js"></script>
+<script src="js/clamp.min.js"></script>
+<script src="js/all.js"></script>
+<script>
+
+    var jianjie = document.getElementsByClassName("jianjie");
+    for (var i = 0; i < jianjie.length; i++){
+        $clamp(jianjie[i], {clamp: 3});
+    }
+    $(".navBtn").click(function(){
+        $('.nav').stop().slideDown('slow')
+    })
+    $(".close").click(function(){
+        $('.nav').stop().slideUp('fast')
+    })
+</script>
+
+<script>
+    new Vue({
+        el:'.vue',
+        data:{
+            page:1,
+            limit:10,
+            search:'',
+            total:'',
+            bannerList:[],
+            articleList:[],
+        },
+        mounted(){
+            this.getPage()
+            this.getBannerList()
+            this.getArticleList()
+        },
+        methods:{
+            getBannerList(){
+                var that = this
+                // /h5/api/official/getBannerList
+                $.ajax({
+                    url:api+'/h5/api/official/getBannerList',
+                    data:{
+                        page:this.page,
+                        limit:this.limit
+                    },
+                    success:function(res){
+                        console.log(res);
+                        that.bannerList = res.data.list
+                        that.swiper()
+                    }
+                })
+            },
+            getArticleList(){
+                // /h5/api/official/getArticleList
+                var that =this
+                $.ajax({
+                    url:api+'/h5/api/official/getArticleList',
+                    data:{
+                        page:this.page,
+                        limit:this.limit,
+                        skey:this.search
+                    },
+                    success:function(res){
+                        console.log(res);
+                        that.total = res.data.total
+                        that.articleList = res.data.list
+                    }
+                })
+            },
+            swiper(){
+                var mySwiper = new Swiper ('.swiper-container', {
+                    loop: true,
+                    //autoplay : 5000,
+                    // 如果需要分页器
+                    //pagination: '.swiper-pagination',
+                    //paginationClickable :true,
+
+                    // 如果需要前进后退按钮
+                    nextButton: '.swiper-button-next',
+                    prevButton: '.swiper-button-prev',
+
+                    observer:true,//修改swiper自己或子元素时，自动初始化swiper
+                    observeParents:true//修改swiper的父元素时，自动初始化swiper
+                })
+            },
+            getPage(){
+                var that =this
+                $("#myPage").sPage({
+                    page:that.page,  //当前页码，必填
+                    total:that.total, //数据总条数，必填
+                    pageSize:10, //每页显示多少条数据，默认10条
+                    showTotal:false,//是否显示总条数，默认关闭：false
+                    totalTxt:"共{total}条",//数据总条数文字描述，{total}为占位符，默认"共{total}条"
+                    noData: false,//没有数据时是否显示分页，默认false不显示，true显示第一页
+                    showSkip:false,//是否显示跳页，默认关闭：false
+                    showPN:true,//是否显示上下翻页，默认开启：true
+                    prevPage:"←",//上翻页文字描述，默认“上一页”
+                    nextPage:"→",//下翻页文字描述，默认“下一页”
+                    backFun:function(page){
+                        //点击分页按钮回调函数，返回当前页码
+                        // $("#pNum").text(page);
+                        that.page = page
+                        if(page>1){
+                            that.getArticleList()
+                        }
+                    }
+                });
+            }
+        }
+    })
+</script>

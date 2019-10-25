@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <title>详情</title>
+    <script>
+        (function(win,doc){
+            function change(){
+                doc.documentElement.style.fontSize=doc.documentElement.clientWidth/375*100+'px';
+            }
+            change();
+            win.addEventListener('resize',change,false);
+        })(window,document);
+    </script>
+    <link rel="stylesheet" href="css/all.css">
+</head>
+<body>
+
+<header>
+    <img class="logo" src="./images/logo@2x.png" alt="">
+    <img class="navBtn" src="./images/icon_home_menu@2x.png" alt="">
+    <ul class="nav">
+        <img class="close" src="./images/icon_menu_close@2x.png" alt="">
+        <li>
+            <a href="index.html">
+                <span class="line"></span>
+                <p>首页</p>
+                <p>HOME</p>
+            </a>
+        </li>
+        <li class="curNav">
+            <a href="list.html">
+                <span class="line"></span>
+                <p>资讯</p>
+                <p>INFORMATION</p>
+            </a>
+        </li>
+        <li>
+            <a href="hezuo.html">
+                <span class="line"></span>
+                <p>商务合作</p>
+                <p>COOPERATION</p>
+            </a>
+        </li>
+        <li>
+            <a href="about.html">
+                <span class="line"></span>
+                <p>关于我们</p>
+                <p>ABOUT US</p>
+            </a>
+        </li>
+    </ul>
+</header>
+
+<content class="vue">
+    <div class="detail">
+        <p class="title">{{detail.title}}</p>
+        <div class="time">
+            <span>内容来源&nbsp;&nbsp;|&nbsp;&nbsp;{{detail.userName}}</span>
+            <span>{{detail.createTime}}</span>
+        </div>
+        <div class="info" v-html="detail.content"></div>
+        <div class="yuedu">阅读量&nbsp;{{detail.readNum}}</div>
+    </div>
+</content>
+
+</body>
+</html>
+<script src="./js/vue.js"></script>
+<script src="./js/jquery-1.10.1.min.js"></script>
+<script src="js/all.js"></script>
+<script>
+    $(".navBtn").click(function(){
+        $('.nav').stop().slideDown('slow')
+    })
+    $(".close").click(function(){
+        $('.nav').stop().slideUp('fast')
+    })
+
+    new Vue({
+        el:'.vue',
+        data:{
+            id:getSearchString('id'),
+            detail:''
+        },
+        mounted(){
+            this.readNum()
+            this.getDetail()
+        },
+        methods:{
+            readNum(){
+                // /h5/api/official/addArticleReadNum
+                var that = this
+                $.ajax({
+                    url:api+'/h5/api/official/addArticleReadNum',
+                    type: "post",
+                    data:{
+                        articleId:this.id
+                    },
+                    success:function(res){
+                        console.log(res)
+                    }
+                })
+            },
+            getDetail(){
+                // /h5/api/official/getArticleDetailById
+                var that =this
+                $.ajax({
+                    url:api+'/h5/api/official/getArticleDetailById',
+                    data:{
+                        articleId:this.id
+                    },
+                    success:function(res){
+                        console.log(res)
+                        that.detail = res.data
+                    }
+                })
+            }
+        }
+    })
+</script>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>详情</title>
+    <link rel="stylesheet" href="css/all.css">
+</head>
+<body>
+
+<header>
+    <div class="center">
+        <div class="logo">
+            <img src="./images/logo.png" alt="">
+        </div>
+        <div class="nav">
+            <a href="index.html">首页</a>
+            <a class="navCur" href="list.html">资讯</a>
+            <a href="hezuo.html">商务合作</a>
+            <a href="about.html">关于我们</a>
+        </div>
+        <div class="search">
+            <input type="text" placeholder="搜索资讯">
+            <span></span>
+        </div>
+    </div>
+</header>
+
+<content class="vue">
+    <div class="detail">
+        <p class="title">{{detail.title}}</p>
+        <div class="time">
+            <span>内容来源&nbsp;&nbsp;|&nbsp;&nbsp;{{detail.userName}}</span>
+            <span>{{detail.createTime}}</span>
+        </div>
+        <div class="info" v-html="detail.content"></div>
+        <div class="yuedu">阅读量&nbsp;{{detail.readNum}}</div>
+    </div>
+</content>
+
+<footer>
+    <div class="center">
+        <div class="footer1">
+            <div class="fl">
+                <img src="./images/footer.png" alt="">
+            </div>
+            <div class="fr">
+                <p>
+                    <img src="./images/Qrcode_gongzhonghao.png" alt="">
+                    <img src="./images/Qrcode_xiaochengxu.png" alt="">
+                </p>
+                <p>
+                    扫一扫立即拥有你的私人保险顾问
+                </p>
+            </div>
+        </div>
+        <div class="footer2">
+            <p>©2019 随身宝典 版权所有 京ICP备17010031号-1</p>
+            <p>北京随身宝典信息科技有限公司</p>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>
+<script src="js/vue.js"></script>
+<script src="js/jquery-1.10.1.min.js"></script>
+<script src="js/all.js"></script>
+<script>
+    new Vue({
+        el:'.vue',
+        data:{
+            id:getSearchString('id'),
+            detail:''
+        },
+        mounted(){
+            this.readNum()
+            this.getDetail()
+        },
+        methods:{
+            readNum(){
+                // /h5/api/official/addArticleReadNum
+                var that = this
+                $.ajax({
+                    url:api+'/h5/api/official/addArticleReadNum',
+                    type: "post",
+                    data:{
+                        articleId:this.id
+                    },
+                    success:function(res){
+                        console.log(res)
+                    }
+                })
+            },
+            getDetail(){
+                // /h5/api/official/getArticleDetailById
+                var that =this
+                $.ajax({
+                    url:api+'/h5/api/official/getArticleDetailById',
+                    data:{
+                        articleId:this.id
+                    },
+                    success:function(res){
+                        console.log(res)
+                        that.detail = res.data
+                    }
+                })
+            }
+        }
+    })
+</script>

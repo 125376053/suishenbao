@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <title>首页</title>
+    <script>
+        (function(win,doc){
+            function change(){
+                doc.documentElement.style.fontSize=doc.documentElement.clientWidth/375*100+'px';
+            }
+            change();
+            win.addEventListener('resize',change,false);
+        })(window,document);
+    </script>
+    <link rel="stylesheet" href="./css/all.css">
+</head>
+<body>
+    <header style="background: transparent; position: absolute; width: 100%; z-index: 9999; height: .6rem;top:0;">
+        <img class="logo" src="./images/logo@2x.png" alt="">
+        <img class="navBtn" src="./images/icon_home_menu@2x.png" alt="">
+        <ul class="nav">
+            <img class="close" src="./images/icon_menu_close@2x.png" alt="">
+            <li class="curNav">
+                <a href="index.html">
+                    <span class="line"></span>
+                    <p>首页</p>
+                    <p>HOME</p>
+                </a>
+            </li>
+            <li>
+                <a href="list.html">
+                    <span class="line"></span>
+                    <p>资讯</p>
+                    <p>INFORMATION</p>
+                </a>
+            </li>
+            <li>
+                <a href="hezuo.html">
+                    <span class="line"></span>
+                    <p>商务合作</p>
+                    <p>COOPERATION</p>
+                </a>
+            </li>
+            <li>
+                <a href="about.html">
+                    <span class="line"></span>
+                    <p>关于我们</p>
+                    <p>ABOUT US</p>
+                </a>
+            </li>
+        </ul>
+    </header>
+    <content>
+        <div class="banner1">
+            <div class="first">
+                <p class="title"><img src="images/suishenbao@2x.png" alt=""></p>
+                <p class="text">专业保险顾问您值得拥有</p>
+                <p class="ma"><img src="images/Qrcode_gongzhonghao@2x.png" alt=""></p>
+                <p class="tou"><img src="images/icon_home_down@2x.png" alt=""></p>
+            </div>
+        </div>
+        <div class="banner2">
+            <div class="first2">
+                <div class="info">
+                    <p class="title">搭建保险沟通桥梁</p>
+                    <p class="jianjie">随身保为有保险需求的客户和专业的保险顾问搭建起沟通的桥梁</p>
+                    <div class="anniu">
+                        <p>
+                            <img src="images/icon_home_dingzhi@2x.png" alt="">
+                            <span>定制产品</span>
+                        </p>
+                        <p>
+                            <img src="images/icon_home_jiangjie@2x.png" alt="">
+                            <span>专业讲解</span>
+                        </p>
+                        <p>
+                            <img src="images/icon_home_zixun@2x.png" alt="">
+                            <span>预约咨询</span>
+                        </p>
+                    </div>
+                </div>
+                <img class="img" src="./images/home_page1_phone@2x.png" alt="">
+            </div>
+        </div>
+        <div class="banner3">
+            <div class="first3">
+                <div class="info">
+                    <p class="title">汇集业界顶级保险顾问</p>
+                    <p class="jianjie">随身保平台的保险顾问均是具有保险从业资质，且从业多年，经过层层筛选的业界大咖。他们肩负为每个家庭配置抵御风险方案的职责，让专业的人干专业的事，告别“一次性销售”“人情买卖”带来的弊端</p>
+                </div>
+                <img class="img" src="./images/home_page2_phone@2x.png" alt="">
+            </div>
+        </div>
+        <div class="banner4">
+            <div class="first4">
+                <div class="info">
+                    <p class="title">以客户需求为导向</p>
+                    <p class="jianjie">注重客户的个性需求，标准化咨询流程+量身定制，为客户提供最优的保险方案。平台保险顾问遍布全国，线上线下均可沟通，真正做到服务至上</p>
+                </div>
+                <img class="img" src="./images/home_page3_phone@2x.png" alt="">
+            </div>
+        </div>
+    </content>
+    <footer>
+        <div class="footer1">
+            <div>
+                <img src="./images/Qrcode_gongzhonghao@2x.png" alt="">
+                <p>随身保公众号</p>
+            </div>
+            <div>
+                <img src="./images/Qrcode_xiaochengxu@2x.png" alt="">
+                <p>随身保小程序</p>
+            </div>
+        </div>
+        <div class="footer2">
+            <p>©2019 随身宝典 版权所有 京ICP备17010031号-1</p>
+            <p>北京随身宝典信息科技有限公司</p>
+        </div>
+    </footer>
+</body>
+</html>
+<script src="./js/vue.js"></script>
+<script src="./js/jquery-1.10.1.min.js"></script>
+<script>
+    $(".navBtn").click(function(){
+        $('.nav').stop().slideDown('slow')
+    })
+    $(".close").click(function(){
+        $('.nav').stop().slideUp('fast')
+    })
+</script>

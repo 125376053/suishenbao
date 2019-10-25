@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <title>关于我们</title>
+    <script>
+        (function(win,doc){
+            function change(){
+                doc.documentElement.style.fontSize=doc.documentElement.clientWidth/375*100+'px';
+            }
+            change();
+            win.addEventListener('resize',change,false);
+        })(window,document);
+    </script>
+    <link rel="stylesheet" href="css/all.css">
+</head>
+<body>
+
+<header>
+    <img class="logo" src="./images/logo@2x.png" alt="">
+    <img class="navBtn" src="./images/icon_home_menu@2x.png" alt="">
+    <ul class="nav">
+        <img class="close" src="./images/icon_menu_close@2x.png" alt="">
+        <li>
+            <a href="index.html">
+                <span class="line"></span>
+                <p>首页</p>
+                <p>HOME</p>
+            </a>
+        </li>
+        <li>
+            <a href="list.html">
+                <span class="line"></span>
+                <p>资讯</p>
+                <p>INFORMATION</p>
+            </a>
+        </li>
+        <li>
+            <a href="hezuo.html">
+                <span class="line"></span>
+                <p>商务合作</p>
+                <p>COOPERATION</p>
+            </a>
+        </li>
+        <li class="curNav">
+            <a href="about.html">
+                <span class="line"></span>
+                <p>关于我们</p>
+                <p>ABOUT US</p>
+            </a>
+        </li>
+    </ul>
+</header>
+
+<content>
+    <div class="baner" style="margin-top: .6rem;">
+        <img src="./images/banner_aboutus@2x.png" alt="" style="max-width: 100%;">
+    </div>
+    <div class="about">
+        <div class="one">
+            <img src="./images/pingtai_baoutus@2x.png" alt="">
+            <div class="text text1">
+                <p class="title">平台</p>
+                <p class="jieshao">随身保典公司成立于2016年，注册资本2800万，专注于科技赋能经纪人。2019年旗下建立随身保，致力于为客户甄选专业的保险专家。</p>
+            </div>
+        </div>
+        <div class="one">
+            <div class="text text2">
+                <p class="title">严选专家团队</p>
+                <p class="jieshao">随身保上的专家团队，均是从专业保险经纪人中甄选出来的，都已在保监官网完成实名认证。</p>
+            </div>
+            <img src="./images/tuandui_baoutus@2x.png" alt="">
+        </div>
+    </div>
+</content>
+
+<footer>
+    <div class="footer1">
+        <div>
+            <img src="./images/Qrcode_gongzhonghao@2x.png" alt="">
+            <p>随身保公众号</p>
+        </div>
+        <div>
+            <img src="./images/Qrcode_xiaochengxu@2x.png" alt="">
+            <p>随身保小程序</p>
+        </div>
+    </div>
+    <div class="footer2">
+        <p>©2019 随身宝典 版权所有 京ICP备17010031号-1</p>
+        <p>北京随身宝典信息科技有限公司</p>
+    </div>
+</footer>
+
+</body>
+</html>
+<script src="./js/vue.js"></script>
+<script src="./js/jquery-1.10.1.min.js"></script>
+<script>
+    $(".navBtn").click(function(){
+        $('.nav').stop().slideDown('slow')
+    })
+    $(".close").click(function(){
+        $('.nav').stop().slideUp('fast')
+    })
+</script>
